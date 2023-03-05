@@ -1,3 +1,14 @@
+<?php 
+ 
+session_start();
+ 
+if (!isset($_SESSION['name'])) {
+    header("Location: admin.php");
+}
+ 
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +16,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -27,29 +38,12 @@
 </head>
 
 <body>
-    <!-- <form id="registration-form" action="proses.php" method="post">
-
-        <label for="">Name</label>
-        <input type="text" name="name" autocomplete="off"><br />
-
-        <label for="">Phone</label>
-        <input type="number" name="phone" autocomplete="off"><br />
-
-        <label for="">Email</label>
-        <input type="email" name="email" autocomplete="off"><br />
-
-        <label for="">age</label>
-        <input type="number" name="age" autocomplete="off"><br />
-
-        <label for="">Address</label>
-        <input type="text" name="address" autocomplete="off"><br />
-
-        <button type="submit" name="submit">Register</button>
-    </form> -->
-
     <div class="header_section">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="logo"><a href="index.html"><img src="images/logo apel.png"></a></div>
+            <div class="logo"><a href="index.php" class="d-flex">
+                    <img src=" images/logo apel.png">
+                    <h2 class="mt-3">Kidney health</h2>
+                </a></div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -57,22 +51,22 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">Home</a>
+                        <a class="nav-link" href="index.php">Home</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="medicine.html">Informasi</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="health.html">Health</a>
+                        <a class="nav-link" href="news.html">Kesehatan Ginjal</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="medicine.html">Program</a>
+                        <a class="nav-link" href="profile.php">
+                            <?php echo "<b>".$_SESSION['name']."</b>"; ?>
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="news.html">Informasi</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="client.html">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="registrasi.html">Register</a>
+                        <a class="nav-link" href="logout.php">Logout</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#"><img src="images/search-icon.png"></a>
@@ -82,8 +76,11 @@
         </nav>
     </div>
 
+
+
     <div class="dashboard_section  ">
-        <h1 class="dashboard_title mt-3 mb-3 ms-5 "><u>Dashboard Admin</u>
+        <?php echo "<h1>Selamat Datang, Admin "."<b>".$_SESSION['name']."!"."</b>"."</h1>"; ?>
+        <h1 class="dashboard_title mt-3 mb-3 ms-5 text-center "><u>Informasi Data Pasien</u>
         </h1>
         <br>
         <a class=" btn btn-primary ms-5 mb-3" href="/contact.php">Add New User</a>

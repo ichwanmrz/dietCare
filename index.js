@@ -6,7 +6,7 @@ form.addEventListener('submit', (e) => {
   const phone = form.elements.phone.value;
 
   // Send form data to server
-  fetch('/proses.php', {
+  fetch('/index.php', {
     method: 'POST',
     body: JSON.stringify({ name, phone })
   })

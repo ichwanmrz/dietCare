@@ -1,4 +1,6 @@
 <?php
+
+
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -6,46 +8,29 @@ $database = "dietcare";
 
 $conn = new mysqli($servername, $username, $password, $database);
 
-$name = "";
-$phone = "";
-$Age = "";
-$Address = "";
+// include 'config.php';
+ 
+error_reporting(0);
+ 
+session_start();
+ 
+if (isset($_SESSION['name'])) {
+    header("Location: dashboard.php");
+}
+ 
+if (isset($_POST['submit'])) {
+    $name = $_POST['name'];
+    $phone = $_POST['phone'];
 
-$errorMessage = "";
-$successMessage = "";
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $name = $_POST["name"];
-    $phone = $_POST["phone"];
-    $Age = $_POST["Age"];
-    $Address = $_POST["Address"];
-    
-    do {
-        if(empty($name) || empty($phone) || empty($Age) || empty($Address)){
-            $errorMessage = "All the fields are required";
-            break;
-        }
-        
-        $sql = "INSERT INTO dietcare(name, phone, Age, Address)".
-        "VALUES('$name','$phone','$Age','$Address')" ;
-        $result = $conn->query($sql);  
-                
-        if (!$result) {
-            $errorMessage="Invalid query:". $conn->error;
-            break;
-          }
-          
-        $name = "";
-        $phone = "";
-        $Age = "";
-        $Address = "";
-        
-        $successMessage = "User Added correctly";
-
-        header("location:/dashboard.php");
-        exit;
-        
-    } while (false);
+    $sql = "SELECT * FROM dietcare WHERE name='$name' AND phone='$phone'";
+    $result = mysqli_query($conn, $sql);
+    if ($result->num_rows > 0) {
+        $row = mysqli_fetch_assoc($result);
+        $_SESSION['name'] = $row['name'];
+        header("Location: dashboard.php");
+    } else {
+        echo "<script>alert('Email atau password Anda salah. Silahkan coba lagi!')</script>";
+    }
 }
 ?>
 
@@ -61,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <!-- site metas -->
-    <title>registrasi</title>
+    <title>Admin</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -96,23 +81,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">Home</a>
+                        <a class="nav-link" href="index.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="health.html">Health</a>
+                        <a class="nav-link" href="medicine.html">Informasi</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="medicine.html">Program</a>
+                        <a class="nav-link" href="news.html">Kesehatan Ginjal</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="news.html">Informasi</a>
+                        <a class="nav-link" href="login.php">Login as User</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="client.html">Login</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="registrasi.html">Register</a>
-                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link" href="#"><img src="images/search-icon.png"></a>
                     </li>
@@ -142,42 +122,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="registrasi_box">
-                            <h1 class="book_title">Registrasi</h1>
 
-                            <?php
-                           if (!empty($errorMessage)) {
-                           echo "
-                           <div class='alert alert-warning alert-dismissible fade show' role='alert'>
-                              <strong>$errorMessage</strong>
-                              <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-                           </div>
-                           ";
-                        }
-                        ?>
+                        <div class="registrasi_box">
+                            <h1 class="book_title">Admin Login</h1>
+
+
 
                             <form id="registration-form" method="post">
                                 <input type="text" class="Name_text" placeholder="Name" name="name"
-                                    value="<?php echo $name;?>">
+                                    value="<?php echo $_POST['name']; ?>">
                                 <input type="text" class="Phone_text" placeholder="Phone Number" name="phone"
-                                    value="<?php echo $phone;?>">
-                                <input type="number" class="Phone_text" placeholder="Age" name="Age"
-                                    value="<?php echo $Age;?>">
-                                <textarea class="massage-bt" placeholder="Alamat Lengkap" rows="5" id="comment"
-                                    name="Address" value="<?php echo $Address;?>"></textarea>
-
-                                <?php if (!empty($succesMessage)) { 
-                              echo "
-                              <div class='alert' role='alert'>
-                              <strong>$errorMessage</strong>
-                              <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-                              </div>
-                              " ; 
-                              } 
-                           ?>
+                                    value="<?php echo $_POST['phone']; ?>">
 
                                 <div class="send_bt">
-                                    <button type="submit">Register</button>
+                                    <button type="submit" name="submit">Login</button>
                                 </div>
                             </form>
                         </div>
