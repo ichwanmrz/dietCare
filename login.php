@@ -57,13 +57,13 @@ if (isset($_POST['submit'])) {
     <!-- Responsive-->
     <link rel="stylesheet" href="css/responsive.css">
     <!-- fevicon -->
-    <link rel="icon" href="images/fevicon.png" type="image/gif" />
+    <!-- <link rel="icon" href="images/fevicon.png" type="image/gif" /> -->
     <!-- Scrollbar Custom CSS -->
-    <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+    <!-- <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css"> -->
     <!-- Tweaks for older IEs-->
-    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <!-- <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"> -->
     <!-- owl stylesheets -->
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <!-- <link rel="stylesheet" href="css/owl.carousel.min.css"> -->
     <!-- <link rel="stylesheet" href="css/owl.theme.default.min.css"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
         media="screen">
@@ -73,7 +73,7 @@ if (isset($_POST['submit'])) {
     <!-- header section start -->
     <div class="header_section">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="logo"><a href="index.html"><img src="images/logo apel.png"></a></div>
+            <div class="logo"><a href="index.php"><img src="images/logo apel.png"></a></div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -84,13 +84,13 @@ if (isset($_POST['submit'])) {
                         <a class="nav-link" href="index.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="medicine.html">Informasi</a>
+                        <a class="nav-link" href="informasi.html">Informasi</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="news.html">Kesehatan Ginjal</a>
+                        <a class="nav-link" href="health.html">Kesehatan Ginjal</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="admin.php">Login as Admin</a>
+                        <a class="nav-link" href="admin.php">Login Admin</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#"><img src="images/search-icon.png"></a>
@@ -124,9 +124,6 @@ if (isset($_POST['submit'])) {
 
                         <div class="registrasi_box">
                             <h1 class="book_title">User Login</h1>
-
-
-
                             <form id="registration-form" method="post">
                                 <input type="text" class="Name_text" placeholder="Name" name="name"
                                     value="<?php echo $_POST['name']; ?>">

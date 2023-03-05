@@ -84,7 +84,8 @@ if (!isset($_SESSION['name'])) {
         </h1>
         <br>
         <a class=" btn btn-primary ms-5 mb-3" href="/contact.php">Add New User</a>
-        <br>
+        <a class=" btn btn-primary mb-3 " href="/sendBC.php">Send Broadcast</a>
+        <a class=" btn btn-primary mb-3 " href="/group.php">Send message to a Group</a> <br>
         <table class="table table-striped ms-5 w-75 text-center">
             <thead>
                 <tr>
